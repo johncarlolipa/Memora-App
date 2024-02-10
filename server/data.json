@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "title": "Meeting Agenda",
+      "description": "Discuss project updates, assign tasks, and set deadlines."
+    },
+    {
+      "id": 2,
+      "title": "Grocery List",
+      "description": "Buy milk, eggs, bread, vegetables, and fruits."
+    },
+    {
+      "id": 3,
+      "title": "Book Recommendations",
+      "description": "Read 'The Great Gatsby' and 'To Kill a Mockingbird'."
+    },
+    {
+      "id": 4,
+      "title": "Travel Plans",
+      "description": "Book flights to Paris, reserve accommodation, and plan sightseeing."
+    },
+    {
+      "id": 5,
+      "title": "Fitness Goals",
+      "description": "Run 5 miles every day and do strength training three times a week."
+    }
+  ]
