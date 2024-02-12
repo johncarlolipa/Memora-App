@@ -43,7 +43,7 @@ function Notes() {
       <div>
         {data.map((item) => (
           <div key={item._id}>
-            <Link to={`/note/${item._id}`}>
+            <Link to={`/notes/${item._id}`}>
               <h3>{item.title}</h3>
 
               <p>
