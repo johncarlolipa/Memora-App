@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routes
+
 // GET ALL
 app.get("/api/notes", async (req, res) => {
   try {
