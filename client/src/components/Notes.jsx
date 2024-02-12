@@ -27,7 +27,6 @@ function Notes() {
     fetchData();
   }, [baseUrl]);
 
-  // Render loading state while data is being fetched
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -42,14 +41,17 @@ function Notes() {
         <Link to={`/add-note`}>Add notes +</Link>
       </div>
       <div>
-        {data.map((note) => (
-          <div key={note.id}>
-            <h3>{note.title}</h3>
-            <p>
-              {note.description.length > 50
-                ? `${note.description.substring(0, 50)}...`
-                : note.description}{" "}
-            </p>
+        {data.map((item) => (
+          <div key={item._id}>
+            <Link to={`/note/${item._id}`}>
+              <h3>{item.title}</h3>
+
+              <p>
+                {item.description.length > 50
+                  ? `${item.description.substring(0, 50)}...`
+                  : item.description}
+              </p>
+            </Link>
           </div>
         ))}
       </div>
