@@ -41,7 +41,7 @@ function Notes() {
   return (
     <div className="container mx-auto py-8">
       <div className="mb-4">
-        <Link to={`/add-note`} className="bg-pomelo text-white px-4 py-2 rounded-lg shadow-md hover:bg-lips">Add notes +</Link>
+        <Link to={`/add-note`} className="bg-pomelo text-white px-4 py-2 rounded-lg shadow-md hover:bg-lips">Add Notes +</Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item) => (

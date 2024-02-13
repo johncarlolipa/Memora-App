@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import arrow from "../assets/arrow.svg";
+import remove from "../assets/delete.svg";
 
 function UpdateNote() {
   const { id } = useParams();
@@ -83,9 +85,18 @@ function UpdateNote() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-4">
-        <Link to="/" className="text-blue-500">Back Home</Link>
-        <button onClick={removeNote} className="ml-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Remove</button>
+      <div className="mb-4 flex">
+        <Link to="/" className="text-blue-500">
+          <button className="bg-blue-300 hover:bg-blue-400 rounded-md px-2 py-2">
+            <img src={arrow} alt="Back Arrow" className="w-7" />
+          </button>
+        </Link>
+        <button
+          onClick={removeNote}
+          className="ml-4 px-4 py-2 bg-red-400 text-white rounded-md hover:bg-red-300"
+        >
+          <img src={remove} alt="Back Arrow" className="w-4 h-3" />
+        </button>
       </div>
 
       <form onSubmit={updateNote}>
@@ -109,7 +120,11 @@ function UpdateNote() {
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           ></textarea>
         </div>
-        <button type="submit" disabled={submitted} className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-blue-600">
+        <button
+          type="submit"
+          disabled={submitted}
+          className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-blue-600"
+        >
           {submitted ? "Saving Note..." : "Update Note"}
         </button>
         {submitted && <div className="mt-2">Note Updated!</div>}
