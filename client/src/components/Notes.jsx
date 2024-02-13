@@ -21,7 +21,7 @@ function Notes() {
         setData(responseData);
         setIsLoading(false);
       } catch (error) {
-        console.error("Fetch error:", error); 
+        console.error("Fetch error:", error);
         setError("Error fetching data.");
         setIsLoading(false);
       }
@@ -31,24 +31,24 @@ function Notes() {
   }, [baseUrl]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="h-screen flex items-center justify-center">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="h-screen flex items-center justify-center">{error}</div>;
   }
 
   return (
-    <div>
-      <div>
-        <Link to={`/add-note`}>Add notes +</Link>
+    <div className="container mx-auto py-8">
+      <div className="mb-4">
+        <Link to={`/add-note`} className="bg-pomelo text-white px-4 py-2 rounded-lg shadow-md hover:bg-lips">Add notes +</Link>
       </div>
-      <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item) => (
-          <div key={item._id}>
-            <Link to={`/notes/${item._id}`}>
-              <h3>{item.title}</h3>
-              <p>
+          <div key={item._id} className="bg-yellowish rounded-lg shadow-md p-4">
+            <Link to={`/notes/${item._id}`} className="block">
+              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+              <p className="text-gray-600">
                 {item.description.length > 50
                   ? `${item.description.substring(0, 50)}...`
                   : item.description}

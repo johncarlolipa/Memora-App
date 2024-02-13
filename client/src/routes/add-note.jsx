@@ -35,34 +35,33 @@ function AddNote() {
   };
 
   return (
-    <div>
-      <Link to="/">back home</Link>
-      <form onSubmit={addNote}>
-        <div>
+    <div className="container mx-auto px-4 py-8">
+      <Link to="/" className="text-blue-500">Back Home</Link>
+      <form onSubmit={addNote} className="mt-4">
+        <div className="mb-4">
           <input
             id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            className=""
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             rows="4"
-            cols="50"
-            className=""
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           ></textarea>
         </div>
-        <button type="submit" disabled={submitted}>
-          {submitted ? "Saving note..." : "Add Note"}
+        <button type="submit" disabled={submitted} className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-blue-600">
+          {submitted ? "Saving Note..." : "Add Note"}
         </button>
-        {submitted && <div>Note added!</div>}
+        {submitted && <div className="mt-2">Note Added!</div>}
       </form>
     </div>
   );

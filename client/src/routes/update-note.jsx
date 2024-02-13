@@ -34,11 +34,11 @@ function UpdateNote() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="text-center">{error}</div>;
   }
 
   const updateNote = async (e) => {
@@ -82,38 +82,37 @@ function UpdateNote() {
   };
 
   return (
-    <div>
-      <div>
-        <Link to="/">back home</Link>
-        <button onClick={removeNote}>Remove</button>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-4">
+        <Link to="/" className="text-blue-500">Back Home</Link>
+        <button onClick={removeNote} className="ml-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Remove</button>
       </div>
 
       <form onSubmit={updateNote}>
-        <div>
+        <div className="mb-4">
           <input
             id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
-            className=""
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             rows="4"
-            cols="50"
-            className=""
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
           ></textarea>
         </div>
-        <button type="submit" disabled={submitted}>
-          {submitted ? "Saving note..." : "Update Note"}
+        <button type="submit" disabled={submitted} className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-blue-600">
+          {submitted ? "Saving Note..." : "Update Note"}
         </button>
-        {submitted && <div>Note added!</div>}
+        {submitted && <div className="mt-2">Note Updated!</div>}
       </form>
     </div>
   );
