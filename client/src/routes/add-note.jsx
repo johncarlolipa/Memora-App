@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function AddNote() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes`;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +21,7 @@ function AddNote() {
       });
 
       if (response.ok) {
-        navigate("/")
+        navigate("/");
         setTitle("");
         setDescription("");
         setSubmitted(true);
@@ -40,6 +40,7 @@ function AddNote() {
       <form onSubmit={addNote}>
         <div>
           <input
+            id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -49,6 +50,7 @@ function AddNote() {
         </div>
         <div>
           <textarea
+            id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
@@ -57,10 +59,7 @@ function AddNote() {
             className=""
           ></textarea>
         </div>
-        <button
-          type="submit"
-          disabled={submitted}
-        >
+        <button type="submit" disabled={submitted}>
           {submitted ? "Saving note..." : "Add Note"}
         </button>
         {submitted && <div>Note added!</div>}

@@ -9,7 +9,7 @@ function Notes() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("baseUrl:", baseUrl); 
+    console.log("baseUrl:", baseUrl);
 
     const fetchData = async () => {
       try {
@@ -21,7 +21,7 @@ function Notes() {
         setData(responseData);
         setIsLoading(false);
       } catch (error) {
-        console.error("Fetch error:", error); // Log any errors that occur during the fetch request
+        console.error("Fetch error:", error); 
         setError("Error fetching data.");
         setIsLoading(false);
       }

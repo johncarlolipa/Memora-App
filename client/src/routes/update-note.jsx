@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link,  useNavigate,  useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function UpdateNote() {
   const { id } = useParams();
   const navigate = useNavigate();
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes/${id}`;
-  const [title, setTitle] = useState(""); 
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,6 @@ function UpdateNote() {
         navigate("/");
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 3000);
-
       } else {
         console.log("Failed to submit data.");
       }
@@ -92,6 +91,7 @@ function UpdateNote() {
       <form onSubmit={updateNote}>
         <div>
           <input
+            id="title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -101,6 +101,7 @@ function UpdateNote() {
         </div>
         <div>
           <textarea
+            id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
