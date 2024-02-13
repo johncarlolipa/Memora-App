@@ -31,7 +31,7 @@ function UpdateNote() {
       }
     };
     fetchData();
-  }, [baseUrl]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
