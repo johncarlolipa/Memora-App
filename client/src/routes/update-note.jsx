@@ -5,7 +5,7 @@ function UpdateNote() {
   const { id } = useParams();
   const navigate = useNavigate();
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes/${id}`;
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(""); 
   const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);

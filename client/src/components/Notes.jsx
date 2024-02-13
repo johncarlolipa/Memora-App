@@ -9,6 +9,8 @@ function Notes() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("baseUrl:", baseUrl); 
+
     const fetchData = async () => {
       try {
         const response = await fetch(baseUrl);
@@ -19,6 +21,7 @@ function Notes() {
         setData(responseData);
         setIsLoading(false);
       } catch (error) {
+        console.error("Fetch error:", error); // Log any errors that occur during the fetch request
         setError("Error fetching data.");
         setIsLoading(false);
       }
@@ -45,7 +48,6 @@ function Notes() {
           <div key={item._id}>
             <Link to={`/notes/${item._id}`}>
               <h3>{item.title}</h3>
-
               <p>
                 {item.description.length > 50
                   ? `${item.description.substring(0, 50)}...`
