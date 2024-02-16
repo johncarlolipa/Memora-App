@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const connectDB = require("./connectDB");
 const Notes = require("./models/Notes");
+const userRoutes = require("./router/user");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -14,11 +15,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  res.setHeader("Access-Control-Allow-Private-Network", "true");
   next();
 });
 
 // routes
+app.use("/api/user", userRoutes);
 
 // GET ALL
 app.get("/api/notes", async (req, res) => {
