@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import arrow from "../assets/arrow.svg";
-import remove from "../assets/delete.svg";
+import { useNavigate, useParams } from "react-router-dom";
+import "animate.css";
 
 function UpdateNote() {
   const { id } = useParams();
@@ -36,7 +35,11 @@ function UpdateNote() {
   }, []);
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   if (error) {
@@ -67,38 +70,8 @@ function UpdateNote() {
     }
   };
 
-  const removeNote = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(baseUrl, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-4 flex">
-        <Link to="/" className="text-blue-500">
-          <button className="bg-blue-300 hover:bg-blue-400 rounded-md px-2 py-2">
-            <img src={arrow} alt="Back Arrow" className="w-7" />
-          </button>
-        </Link>
-        <button
-          onClick={removeNote}
-          className="ml-4 px-4 py-2 bg-red-400 text-white rounded-md hover:bg-red-300"
-        >
-          <img src={remove} alt="Back Arrow" className="w-4 h-3" />
-        </button>
-      </div>
-
       <form onSubmit={updateNote}>
         <div className="mb-4">
           <input
@@ -123,7 +96,7 @@ function UpdateNote() {
         <button
           type="submit"
           disabled={submitted}
-          className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-blue-600"
+          className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-lips"
         >
           {submitted ? "Saving Note..." : "Update Note"}
         </button>
