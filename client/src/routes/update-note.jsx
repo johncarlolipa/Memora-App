@@ -32,7 +32,7 @@ function UpdateNote() {
       }
     };
     fetchData();
-  }, []);
+  }, [baseUrl]);
 
   if (isLoading) {
     return (

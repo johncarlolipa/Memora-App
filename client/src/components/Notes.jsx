@@ -31,7 +31,7 @@ function Notes() {
     fetchData();
   }, [baseUrl]);
 
-  const removenote = async (id) => {
+  const removeNote = async (id) => {
     try {
       const response = await fetch(`${baseUrl}/${id}`, {
         method: "DELETE",
@@ -90,7 +90,7 @@ function Notes() {
               </Link>
               <FaTrashAlt
                 className="text-gray-600 hover:text-gray-800 cursor-pointer"
-                onClick={() => removenote(item._id)}
+                onClick={() => removeNote(item._id)}
               />
             </div>
           </div>
