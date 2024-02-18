@@ -6,7 +6,15 @@ const userRoutes = require("./router/user");
 const requireAuth = require("./middleware/requireAuth");
 const notes = require("./router/note");
 
+
 const app = express();
+app.use(
+  cors({
+    origin: ["https://memora-app.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 const PORT = process.env.PORT || 8000;
 
 // middleware
@@ -25,7 +33,6 @@ app.use("/api/user", userRoutes);
 // require auth for all notes routes
 app.use(requireAuth);
 app.use("/api/notes", notes);
-
 
 app.get("/", (req, res) => {
   res.json("hello");
