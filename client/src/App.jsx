@@ -13,9 +13,17 @@ import UpdateNote from "./routes/update-note";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import SingleNote from "./routes/single-note";
+import { useEffect } from "react";
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+
+    dispatch({ type: "LOGIN", payload: JSON.parse(userData) });
+  }, []);
+
   return (
     <>
       <Router>
