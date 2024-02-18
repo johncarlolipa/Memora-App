@@ -4,6 +4,7 @@ const express = require("express");
 const connectDB = require("./connectDB");
 const Notes = require("./models/Notes");
 const userRoutes = require("./router/user");
+const requireAuth = require("./middleware/requireAuth")
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -19,8 +20,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // routes
 app.use("/api/user", userRoutes);
+// require auth for all notes routes
+app.use(requireAuth)
 
 // GET ALL
 app.get("/api/notes", async (req, res) => {
