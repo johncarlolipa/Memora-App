@@ -8,18 +8,20 @@ const notes = require("./router/note");
 const fetch = require('node-fetch');
 
 const app = express();
+
+// Use CORS middleware before any routes are defined
 app.use(
   cors({
     origin: ["https://memora-app.vercel.app"],
-    methods: ["POST", "GET", "DELETE", "DELETE"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
 );
+
 const PORT = process.env.PORT || 8000;
 
 // middleware
 connectDB();
-app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -44,7 +46,6 @@ app.delete("/api/notes/:id", async (req, res) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // Forward other headers as needed
       },
     });
 
@@ -54,7 +55,6 @@ app.delete("/api/notes/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 // Proxy PUT requests to the notes API
 app.put("/api/notes/:id", async (req, res) => {
@@ -66,9 +66,8 @@ app.put("/api/notes/:id", async (req, res) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        // Forward other headers as needed
       },
-      body: JSON.stringify(req.body), // Forward the request body
+      body: JSON.stringify(req.body),
     });
 
     res.status(response.status).json(await response.json());
