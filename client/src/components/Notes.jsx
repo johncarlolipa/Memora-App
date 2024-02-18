@@ -57,6 +57,24 @@ function Notes() {
     }
   };
 
+  // Function to format createdAt time
+  const formatCreatedAt = (createdAt) => {
+    const currentTime = new Date();
+    const noteTime = new Date(createdAt);
+    const timeDifference = Math.abs(currentTime - noteTime);
+    const minutesDifference = Math.round(timeDifference / (1000 * 60));
+
+    if (minutesDifference < 60) {
+      return `${minutesDifference} mins ago`;
+    } else if (minutesDifference < 60 * 24) {
+      const hoursDifference = Math.floor(minutesDifference / 60);
+      return `${hoursDifference} hour${hoursDifference > 1 ? "s" : ""} ago`;
+    } else {
+      const daysDifference = Math.floor(minutesDifference / (60 * 24));
+      return `${daysDifference} day${daysDifference > 1 ? "s" : ""} ago`;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -94,6 +112,11 @@ function Notes() {
                   ? `${item.description.substring(0, 200)}...`
                   : item.description}
               </p>
+              <div>
+                <span className="text-xs text-gray-500">
+                  {formatCreatedAt(item.createdAt)}
+                </span>
+              </div>
             </Link>
             <div className="absolute top-0 right-0 p-2 flex space-x-2">
               <Link to={`/notes/${item._id}`}>
