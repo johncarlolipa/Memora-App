@@ -4,7 +4,7 @@ const express = require("express");
 const connectDB = require("./connectDB");
 const Notes = require("./models/Notes");
 const userRoutes = require("./router/user");
-const requireAuth = require("./middleware/requireAuth")
+const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -20,16 +20,16 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // routes
 app.use("/api/user", userRoutes);
 // require auth for all notes routes
-app.use(requireAuth)
+app.use(requireAuth);
 
 // GET ALL
 app.get("/api/notes", async (req, res) => {
   try {
-    const data = await Notes.find({});
+    const user_id = req.user._id;
+    const data = await Notes.find({ user_id });
     if (!data) {
       throw new Error("An error occured while fetching notes...");
     }
@@ -56,8 +56,9 @@ app.get("/api/notes/:id", async (req, res) => {
 // CREATE NOTE
 app.post("/api/notes", async (req, res) => {
   try {
+    const user_id = req.user._id;
     const { title, description } = req.body;
-    const data = await Notes.create({ title, description });
+    const data = await Notes.create({ title, description, user_id });
     if (!data) {
       throw new Error("An error occured while creating note...");
     }
