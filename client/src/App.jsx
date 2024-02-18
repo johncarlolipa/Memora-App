@@ -5,13 +5,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
-import Home from "./routes/home";
+import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AddNote from "./routes/add-note";
 import UpdateNote from "./routes/update-note";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import SingleNote from "./routes/single-note";
 
 function App() {
   const { user } = useAuthContext();
@@ -26,6 +27,7 @@ function App() {
           />
           <Route path="/add-note" element={<AddNote />} />
           <Route path="/notes/:id" element={<UpdateNote />} />
+          <Route path="/note/:id" element={<SingleNote />} />
           <Route
             path="/signup"
             element={!user ? <Signup /> : <Navigate to="/" />}

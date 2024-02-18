@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <div className="bg-pharlap p-4 flex items-center justify-between">
       <Link to="/" className="flex items-center space-x-2">
-        <img src={logo} alt="React Logo" className="h-8 w-8" />
+        <img src={logo} alt="React Logo" className="h-10 w-10 ml-6" />
       </Link>
       <nav className="flex items-center">
           {user && (
@@ -21,7 +21,7 @@ function Navbar() {
               <span className="text-white font-semibold">Hi, {user.username}</span>
               <button
                 onClick={handleClick}
-                className="px-4 py-2 bg-yellowish hover:border border-gray-300  font-semibold rounded-md"
+                className="px-4 py-2 bg-yellowish hover:bg-yellow-100  font-semibold rounded-md"
               >
                 Log out
               </button>
