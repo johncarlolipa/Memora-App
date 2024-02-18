@@ -5,13 +5,13 @@ const connectDB = require("./connectDB");
 const userRoutes = require("./router/user");
 const requireAuth = require("./middleware/requireAuth");
 const notes = require("./router/note");
-
+const fetch = require('node-fetch');
 
 const app = express();
 app.use(
   cors({
     origin: ["https://memora-app.vercel.app"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "DELETE", "DELETE"],
     credentials: true,
   })
 );
@@ -33,6 +33,50 @@ app.use("/api/user", userRoutes);
 // require auth for all notes routes
 app.use(requireAuth);
 app.use("/api/notes", notes);
+
+// Proxy DELETE requests to the notes API
+app.delete("/api/notes/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const apiUrl = `https://notesapp-backend-server.vercel.app/api/notes/${id}`;
+
+    const response = await fetch(apiUrl, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        // Forward other headers as needed
+      },
+    });
+
+    res.status(response.status).json(await response.json());
+  } catch (error) {
+    console.error("Proxy error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+// Proxy PUT requests to the notes API
+app.put("/api/notes/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const apiUrl = `https://notesapp-backend-server.vercel.app/api/notes/${id}`;
+
+    const response = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        // Forward other headers as needed
+      },
+      body: JSON.stringify(req.body), // Forward the request body
+    });
+
+    res.status(response.status).json(await response.json());
+  } catch (error) {
+    console.error("Proxy error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.get("/", (req, res) => {
   res.json("hello");
