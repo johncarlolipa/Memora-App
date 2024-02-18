@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "animate.css";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function UpdateNote() {
+  const { user } = useAuthContext();
   const { id } = useParams();
   const navigate = useNavigate();
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes/${id}`;
@@ -15,7 +17,11 @@ function UpdateNote() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(baseUrl);
+        const response = await fetch(baseUrl, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
 
         if (!response.ok) {
           throw new Error("Failed to fetch data.");
@@ -31,8 +37,11 @@ function UpdateNote() {
         setIsLoading(false);
       }
     };
-    fetchData();
-  }, [baseUrl]);
+
+    if (user) {
+      fetchData();
+    }
+  }, [baseUrl, user]);
 
   if (isLoading) {
     return (
@@ -48,10 +57,19 @@ function UpdateNote() {
 
   const updateNote = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      setError("You must be logged in.");
+      return;
+    }
+
     try {
       const response = await fetch(baseUrl, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
         body: JSON.stringify({
           title,
           description,

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function Notes() {
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes`;
+  const { user } = useAuthContext();
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,7 +16,11 @@ function Notes() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(baseUrl);
+        const response = await fetch(baseUrl, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Failed to fetch data.");
         }
@@ -28,18 +34,23 @@ function Notes() {
       }
     };
 
-    fetchData();
-  }, [baseUrl]);
+    if (user) {
+      fetchData();
+    }
+  }, [baseUrl, user]);
 
   const removeNote = async (id) => {
     try {
       const response = await fetch(`${baseUrl}/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
       });
       if (!response.ok) {
         throw new Error("Failed to delete note.");
       }
-      // Remove the deleted note from the state
       setData(data.filter((note) => note._id !== id));
     } catch (error) {
       console.error("Delete error:", error);

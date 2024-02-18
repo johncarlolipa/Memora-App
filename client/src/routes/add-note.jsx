@@ -1,19 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function AddNote() {
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const baseUrl = `${import.meta.env.VITE_SERVER_URL}/api/notes`;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(null);
 
   const addNote = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setError("You must be logged in.");
+      return;
+    }
+
     try {
       const response = await fetch(baseUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
         body: JSON.stringify({
           title,
           description,
@@ -33,6 +44,10 @@ function AddNote() {
       console.log(error);
     }
   };
+
+  if (error) {
+    return <div className="text-center">{error}</div>;
+  }
 
   return (
     <div className="container mx-auto w-[600px] px-4 py-8">
