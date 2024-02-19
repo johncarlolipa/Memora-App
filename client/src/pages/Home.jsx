@@ -73,7 +73,7 @@ function Home() {
   }
 
   return (
-    <div className="container mx-auto py-8 h-[500px]">
+    <div className="px-8 mx-auto py-8 h-[500px]">
       <div className="mb-10 flex justify-end">
         <Link
           to={`/add-note`}

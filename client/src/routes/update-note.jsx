@@ -89,7 +89,7 @@ function UpdateNote() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-8 py-8  h-[500px] mt-10">
       <form onSubmit={updateNote}>
         <div className="mb-4">
           <input

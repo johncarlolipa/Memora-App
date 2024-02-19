@@ -80,9 +80,9 @@ function SingleNote() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 w-[700px] relative">
+    <div className="container mx-auto px-8 py-8 h-[500px]">
       {note ? (
-        <div className="bg-yellowish rounded-lg shadow-md p-8 relative">
+        <div className="bg-yellowish rounded-lg shadow-md p-4 md:p-8 relative">
           <h2 className="text-2xl font-bold mb-4">{note.title}</h2>
           <p className="text-gray-700">{note.description}</p>
 
