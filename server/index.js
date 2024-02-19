@@ -9,7 +9,7 @@ const fetch = require('node-fetch');
 
 const app = express();
 
-// Use CORS middleware before any routes are defined
+// cors
 app.use(
   cors({
     origin: ["https://memora-app.vercel.app"],
