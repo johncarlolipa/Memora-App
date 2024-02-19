@@ -77,7 +77,7 @@ function UpdateNote() {
   };
 
   return (
-    <div className="container mx-auto px-8 py-8 mt-10 h-[550px]">
+    <div className="container mx-auto px-8 py-8 mt-10 h-[450px]">
       {isLoading ? (
         <div className="min-h-screen flex items-center justify-center">
           <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
@@ -102,7 +102,7 @@ function UpdateNote() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description"
-              rows="4"
+              rows="8"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
             ></textarea>
           </div>
