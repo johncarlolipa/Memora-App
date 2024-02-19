@@ -46,12 +46,12 @@ function AddNote() {
   };
 
   if (error) {
-    return <div className="text-center">{error}</div>;
+    return <div className="container mx-auto px-4 py-8 text-center">{error}</div>;
   }
 
   return (
-    <div className="container mx-auto w-[600px] px-4 py-8">
-      <form onSubmit={addNote} className="mt-4">
+    <div className="container mx-auto px-4 py-8">
+      <form onSubmit={addNote} className="max-w-md mx-auto">
         <div className="mb-4">
           <input
             id="title"
@@ -75,11 +75,11 @@ function AddNote() {
         <button
           type="submit"
           disabled={submitted}
-          className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-pomelo"
+          className="w-full px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-pomelo"
         >
           {submitted ? "Saving Note..." : "Add Note"}
         </button>
-        {submitted && <div className="mt-2">Note Added!</div>}
+        {submitted && <div className="mt-2 text-center">Note Added!</div>}
       </form>
     </div>
   );
