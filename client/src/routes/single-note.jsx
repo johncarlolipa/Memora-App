@@ -79,7 +79,7 @@ function SingleNote() {
   }
 
   return (
-    <div className="container mx-auto px-8 py-8 h-[700px]">
+    <div className="container mx-auto px-8 py-8 h-[550px]">
       {isLoading ? (
         <div className="min-h-screen flex items-center justify-center">
           <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
