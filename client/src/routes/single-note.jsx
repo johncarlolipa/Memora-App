@@ -79,33 +79,24 @@ function SingleNote() {
   }
 
   return (
-    <div className="container mx-auto px-8 py-8">
-      {isLoading ? (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
+    <div className="container mx-auto px-8 py-8 h-[500px]">
+      {note ? (
+        <div className="bg-yellowish rounded-lg shadow-md p-4 md:p-8 relative">
+          <h2 className="text-2xl font-bold mb-4">{note.title}</h2>
+          <p className="text-gray-700">{note.description}</p>
+
+          <div className="absolute top-0 right-0 p-2 flex space-x-2">
+            <Link to={`/notes/${note._id}`}>
+              <FaEdit className="text-gray-600 hover:text-gray-800 cursor-pointer" />
+            </Link>
+            <FaTrashAlt
+              className="text-gray-600 hover:text-gray-800 cursor-pointer"
+              onClick={() => removeNote(note._id)}
+            />
+          </div>
         </div>
-      ) : error ? (
-        <div className="text-center">{error}</div>
       ) : (
-        <div className="relative">
-          {note ? (
-            <div className="bg-yellowish rounded-lg shadow-md p-4 md:p-8">
-              <h2 className="text-2xl font-bold mb-4">{note.title}</h2>
-              <p className="text-gray-700">{note.description}</p>
-              <div className="absolute top-0 right-0 p-2 flex space-x-2">
-                <Link to={`/notes/${note._id}`}>
-                  <FaEdit className="text-gray-600 hover:text-gray-800 cursor-pointer" />
-                </Link>
-                <FaTrashAlt
-                  className="text-gray-600 hover:text-gray-800 cursor-pointer"
-                  onClick={() => removeNote(note._id)}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="text-center">Note not found.</div>
-          )}
-        </div>
+        <div className="text-center">Note not found.</div>
       )}
     </div>
   );

@@ -43,6 +43,18 @@ function UpdateNote() {
     }
   }, [baseUrl, user]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center">{error}</div>;
+  }
+
   const updateNote = async (e) => {
     e.preventDefault();
 
@@ -77,45 +89,37 @@ function UpdateNote() {
   };
 
   return (
-    <div className="container mx-auto px-8 py-8 mt-10">
-      {isLoading ? (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
+    <div className="container mx-auto px-8 py-8  h-[500px] mt-10">
+      <form onSubmit={updateNote}>
+        <div className="mb-4">
+          <input
+            id="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          />
         </div>
-      ) : error ? (
-        <div className="text-center">{error}</div>
-      ) : (
-        <form onSubmit={updateNote}>
-          <div className="mb-4">
-            <input
-              id="title"
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description"
-              rows="4"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            disabled={submitted}
-            className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-lips"
-          >
-            {submitted ? "Saving Note..." : "Update Note"}
-          </button>
-          {submitted && <div className="mt-2">Note Updated!</div>}
-        </form>
-      )}
+        <div className="mb-4">
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            rows="4"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          disabled={submitted}
+          className="px-4 py-2 bg-pomelo text-white rounded-md hover:bg-lips focus:outline-none focus:bg-lips"
+        >
+          {submitted ? "Saving Note..." : "Update Note"}
+        </button>
+        {submitted && <div className="mt-2">Note Updated!</div>}
+      </form>
     </div>
   );
 }
