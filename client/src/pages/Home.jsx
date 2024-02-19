@@ -58,22 +58,8 @@ function Home() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="h-screen flex items-center justify-center">{error}</div>
-    );
-  }
-
   return (
-    <div className="px-8 mx-auto py-8 h-[500px]">
+    <div className="px-8 mx-auto py-8">
       <div className="mb-10 flex justify-end">
         <Link
           to={`/add-note`}
@@ -82,12 +68,17 @@ function Home() {
           Add Notes +
         </Link>
       </div>
-      {data.length === 0 ? (
+      {isLoading ? (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="w-16 h-16 border-4 border-pomelo rounded-full animate-spin"></div>
+        </div>
+      ) : error ? (
+        <div className="h-screen flex items-center justify-center">{error}</div>
+      ) : data.length === 0 ? (
         <div className="text-center mt-20">
           <p className="text-gray-600 text-lg">
             You don't have any notes. Create one.
           </p>
-
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
